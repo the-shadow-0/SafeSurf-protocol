@@ -1,3 +1,5 @@
+<div align="center">
+
 # 🌊 SafeSurf Protocol
 ### *The Definitive Safety Layer for the Invisible Web*
 
@@ -5,6 +7,8 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/LICENSE)
 [![Safety](https://img.shields.io/badge/safety-checked-orange?style=for-the-badge)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/SECURITY.md)
 [![Platform](https://img.shields.io/badge/platform-linux-lightgrey?style=for-the-badge)](https://www.linux.org/)
+
+</div>
 
 ---
 
