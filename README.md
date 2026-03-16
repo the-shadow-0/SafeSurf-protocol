@@ -138,4 +138,6 @@ sequenceDiagram
 ## 🛡️ Security Policy
 Found a bug? Help us keep the web safe. Submit a report via [GitHub Issues](https://github.com/the-shadow-0/SafeSurf-protocol/issues) or consult [SECURITY.md](SECURITY.md).
 
-**License**: Distributed under the **MIT License**. Created by the-shadow-0.
+**License**: Distributed under the **MIT License**. Created by **Noureddine BENMANSER** aka (the-shadow-0).
+
+<br>
