@@ -14,3 +14,4 @@ Please report security issues directly on our [GitHub Issues](https://github.com
 - [ ] Sensitive memory zeroization (verified via `zeroize`).
 - [ ] No plaintext credential logging.
 - [ ] Sandbox isolation (per-tab sessions).
+
