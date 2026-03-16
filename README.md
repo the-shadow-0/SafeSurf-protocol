@@ -1,4 +1,4 @@
-# SafeSurf Protocol (Reference Implementation)
+# SafeSurf Protocol (Reference Implementation) 
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/the-shadow-0/SafeSurf-protocol)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/LICENSE)
