@@ -3,12 +3,13 @@
 # 🌊 SafeSurf Protocol
 ### *The Definitive Safety Layer for the Invisible Web*
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)](https://github.com/the-shadow-0/SafeSurf-protocol)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/LICENSE)
-[![Safety](https://img.shields.io/badge/safety-checked-orange?style=for-the-badge)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/SECURITY.md)
-[![Platform](https://img.shields.io/badge/platform-linux-lightgrey?style=for-the-badge)](https://www.linux.org/)
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge&logo=github)](https://github.com/the-shadow-0/SafeSurf-protocol)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge&logo=opensourceinitiative)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/LICENSE)
+[![Safety](https://img.shields.io/badge/Safety-Checked-orange?style=for-the-badge&logo=fortinet)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/SECURITY.md)
+[![Platform](https://img.shields.io/badge/Platform-Linux-lightgrey?style=for-the-badge&logo=linux)](https://www.linux.org/)
+[![Language](https://img.shields.io/badge/Language-Rust-black?style=for-the-badge&logo=rust)](https://www.rust-lang.org/)
 
-</div>
+</div> 
 
 ---
 
