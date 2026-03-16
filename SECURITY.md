@@ -15,3 +15,4 @@ Please report security issues directly on our [GitHub Issues](https://github.com
 - [ ] No plaintext credential logging.
 - [ ] Sandbox isolation (per-tab sessions).
 
+ 
