@@ -1,134 +1,137 @@
-# SafeSurf Protocol (Official Reference Implementation)
+# 🌊 SafeSurf Protocol
+### *The Definitive Safety Layer for the Invisible Web*
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/the-shadow-0/SafeSurf-protocol)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/LICENSE)
-[![Safety](https://img.shields.io/badge/safety-checked-orange)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/SECURITY.md)
-[![Platform](https://img.shields.io/badge/platform-linux-lightgrey)](https://www.linux.org/)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)](https://github.com/the-shadow-0/SafeSurf-protocol)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/LICENSE)
+[![Safety](https://img.shields.io/badge/safety-checked-orange?style=for-the-badge)](https://github.com/the-shadow-0/SafeSurf-protocol/blob/main/SECURITY.md)
+[![Platform](https://img.shields.io/badge/platform-linux-lightgrey?style=for-the-badge)](https://www.linux.org/)
 
-**SafeSurf Protocol** is a defensive, privacy-first safety layer designed to protect users navigating risky networks, including the deep web and dark net. It supplements traditional anonymity tools (like Tor) by neutralizing malicious content, preventing credential theft, and mitigating metadata leakage through content-level sanitization and heuristic risk scoring.
+---
+
+## 📖 Overview
+
+**SafeSurf Protocol (SSP)** is a state-of-the-art, defensive networking implementation designed to provide a "clean-pipe" experience for users navigating anonymization networks (Tor, I2P). Unlike traditional proxies that focus solely on identity, SafeSurf prioritizes **Content Integrity** and **Metadata Hardening**.
+
+By intercepting and "washing" traffic at the protocol level, SafeSurf neutralizes browser-based exploits, strips malicious telemetry, and provides a deterministic safety score for every node you visit.
 
 ---
 
 ## 🏛 Architecture & Architectural Flow
 
-SafeSurf acts as a local security controller that "washes" untrusted network traffic before it reaches your applications. It follows a **Defense-in-Depth** model: **Browser -> SafeSurf -> Tor**.
+SafeSurf operates as a local security controller that "washes" untrusted network traffic before it reaches your applications. It follows a **Defense-in-Depth** model: **Browser -> SafeSurf -> Tor**.
 
-### System Architecture
+### 🛡️ System Architecture
 ```mermaid
 graph TD
-    subgraph "Local Secure Perimeter"
-        Browser[Browser / App] -->|HTTP Proxy| Daemon[SafeSurf Daemon]
-        CLI[SafeSurf CLI] -->|Secure Protocol| Daemon
-        Daemon -->|Sanitization| Engine[Core Safety Engine]
-        Engine -->|Heuristic Risk| Scorer[Risk Scorer]
-        Engine -->|Secret Storage| Vault[Secure Vault]
+    subgraph "Sandboxed Execution Zone"
+        Browser[Browser / Application] -->|HTTP/HTTPS Proxy| Daemon[SafeSurf Controller]
+        CLI[SafeSurf CLI] -->|Authenticated SSP| Daemon
+        Daemon -->|Analysis| Engine[Safety Pipeline]
+        Engine -->|Zero-Day Mitigation| Sanitizer[HTML Sanitizer]
+        Engine -->|Heuristic Eval| Scorer[Risk Scorer]
+        Engine -->|Encrypted Storage| Vault[Secure Vault]
     end
     
-    Daemon -->|SOCKS5 / Onion Routing| Network[Tor / Dark Net]
-    Network -->|Raw Content| Daemon
+    Daemon -->|SOCKS5 Connection| Tor[Tor Network]
+    Tor -->|Raw Ingress| Daemon
     
-    style Daemon fill:#4f4,stroke:#333,stroke-width:4px
-    style Engine fill:#fff,stroke:#333,stroke-dasharray: 5 5
+    style Daemon fill:#1a1a1a,stroke:#4f4,stroke-width:3px,color:#fff
+    style Engine fill:#2a2a2a,stroke:#888,stroke-dasharray: 5 5,color:#fff
 ```
 
-### Network Chaining Flow
-This diagram illustrates how SafeSurf intercepts and filters traffic between your application and the Tor network.
+### 🛰️ Network Chaining Flow (The "Wash" Cycle)
+SafeSurf implements a sophisticated proxy-chaining mechanism to ensure no data is processed without inspection.
 
 ```mermaid
 graph LR
-    subgraph Client Device
-        A[Browser / App] -->|1. Intercept HTTP Proxy| B[SafeSurf Controller]
-        B -->|2. Route SOCKS5| C[Tor Daemon]
+    subgraph "Trust Zone: Client"
+        A[Application] -->|1. Request| B[SafeSurf]
+        B -->|2. Route| C[Tor Daemon]
     end
-    C -->|3. Onion Routing| D[Deep Web Resource]
-    D -->>|4. Return Raw Data| C
-    C -->>|5. Forward| B
-    B -->>|6. Sanitize & Score| B
-    B -->>|7. Delivery Safe Content| A
+    C -->|3. Onion Routing| D[Target Resource]
+    D -.->|4. Return Raw Data| C
+    C -.->|5. Forward| B
+    B -.->|6. Sanitize & Risk-Score| B
+    B -.->|7. Hardened Content| A
     
-    style B fill:#f96,stroke:#333,stroke-width:4px
+    style B fill:#333,stroke:#f96,stroke-width:3px,color:#fff
 ```
 
 ---
 
-## 🛠 Integration Patterns
+## ✨ Premium Security Features
 
-### 🧵 Pattern 1: Tor Browser Integration (GUI)
-You can configure the Tor Browser to use `safe_surfd` as its HTTP/HTTPS proxy. 
-- **Effect**: Every page you visit is automatically screened for risk and sanitized before the browser's rendering engine ever sees it.
-- **Benefit**: Provides an additional layer of protection against 0-day browser exploits and identity-leaking scripts.
-
-### 🤖 Pattern 2: Daemon-as-a-Service (Headless/CLI)
-If you are building custom scraping tools or headless applications, you can use `safe_surfd` as a **Safety Microservice**.
-
-```mermaid
-sequenceDiagram
-    participant Tool as Custom CLI / Script
-    participant Tor as Tor SOCKS5
-    participant SS as SafeSurf Daemon
-    
-    Tool->>Tor: Fetch raw content (via Socks5)
-    Tor-->>Tool: Return potentially malicious data
-    Tool->>SS: POST /content/risk (with raw data)
-    SS-->>Tool: Return Risk Score + Findings
-    Tool->>SS: POST /content/sanitize (with raw data)
-    SS-->>Tool: Return Sanitized "Safe" Content
-    Tool->>Tool: Process Safe Content
-```
+| Feature | Description | Primitive |
+| :--- | :--- | :--- |
+| **Neutralization Engine** | Aggressively strips scripts, tracking pixels, and malicious tags. | `ammonia-rs` |
+| **Secure Handshake** | Ephemeral, authenticated local control plane. | `X25519` / `Handshake` |
+| **Memory Isolation** | All sensitive data is zeroed immediately after use. | `zeroize` |
+| **Hardened Vault** | High-entropy storage for deep-web credentials. | `Argon2id` / `XChaCha20-P1305` |
+| **Global Jitter** | Defeats traffic analysis via timing obfuscation. | `safe_surf_core::privacy` |
 
 ---
 
-## ✨ Key Features
+## 🚀 Deployment & Operations
 
-- 🛡️ **Neutralization Engine**: Strips active scripts, tracking pixels, and harmful HTML attributes before rendering.
-- 🔐 **Secure Handshake**: Noise-inspired ephemeral key exchange (X25519) for all local control traffic.
-- 🗄️ **Argon2id Vault**: Local-first encrypted storage for identity-sensitive tokens and private keys.
-- 📉 **Explainable Risk Scoring**: Heuristic data analysis providing a transparency-first "Safety Score" for deep-web nodes.
-- 🚀 **Production Hardening**: Integrated `systemd` service with sandboxing (PrivateTmp, etc.) and global proxy injection tools.
-
----
-
-## 🚀 Quickstart & Installation
-
-### 1. Build from Source
+### 📦 Installation (Linux Ecosystem)
 ```bash
+# 1. Clone & Secure
 git clone https://github.com/the-shadow-0/SafeSurf-protocol.git
 cd SafeSurf-protocol
-cargo build --release
-```
 
-### 2. Install as a System-Wide Daemon
-Deploy SafeSurf as a hardened background service on any Linux system:
-```bash
+# 2. Production Optimized Build
+cargo build --release
+
+# 3. Register System Service
 sudo cp target/release/safe_surfd /usr/bin/
 sudo cp safe-surfd.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now safe_surfd
 ```
 
-### 3. Auto-Configure Global Proxy
-Route all system traffic through the safety engine with a single command:
+### 🎛️ System-Wide Integration
+Route every application on your machine through the safety engine with a single command:
 ```bash
-# Auto-configures GNOME/D-Bus settings
+# Enable Global Transparency
 ./target/release/safe_surf_cli sys-setup --enable
+```
+*Note: This utilizes GNOME GSettings and environment injection for maximum coverage.*
+
+---
+
+## 🛠 Integration Patterns
+
+### 1. Tor Browser (Defense-in-Depth)
+Configure Tor Browser to use SafeSurf as its **Primary HTTP Proxy** (`127.0.0.1:8080`).
+- **Result**: You gain protection against browser exploits even if Tor's builtin security fails.
+
+### 2. Headless/SDK Pattern (Daemon-as-a-Service)
+Use SafeSurf as a high-security microservice for automated tools.
+
+```mermaid
+sequenceDiagram
+    participant Tool as Scraper / Bot
+    participant Tor as Tor Proxy
+    participant SS as SafeSurf
+    
+    Tool->>Tor: Fetch via Tor
+    Tor-->>Tool: Return Raw Payload
+    Tool->>SS: POST /content/risk (Ingest)
+    SS-->>Tool: Results (Safe/Unsafe)
+    Tool->>SS: POST /content/sanitize (Washing)
+    SS-->>Tool: Hardened Content
 ```
 
 ---
 
-## ⚙️ Development & CI
-The project includes primary automated quality gates:
-- **`cargo test`**: Full suite of cryptographic and sanitization tests.
-- **`cargo-audit`**: Automated vulnerability scanning for dependencies.
-- **`cargo clippy`**: Strict linting for production-quality standards.
+## ⚖️ Ethical Foundation & Compliance
+
+- **Defensive Design**: SafeSurf is explicitly built as a shield. It does NOT facilitate illegal access, proxy bypassing, or anonymity service creation.
+- **Privacy First**: We do not log URLs, payloads, or user identifiers. All processing occurs locally on the host.
 
 ---
 
-## ⚖️ Ethics & License
+## 🛡️ Security Policy
+Found a bug? Help us keep the web safe. Submit a report via [GitHub Issues](https://github.com/the-shadow-0/SafeSurf-protocol/issues) or consult [SECURITY.md](SECURITY.md).
 
-- **Ethical Foundation**: This protocol is strictly defensive. It aims to protect user privacy and safety, and must not be used to facilitate illegal activity or circumvent lawful transparency.
-- **License**: This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for the full legal text.
-
----
-
-## 🛡️ Security
-Security is our priority. If you discover a vulnerability, please report it via [GitHub Issues](https://github.com/the-shadow-0/SafeSurf-protocol/issues). Detailed disclosure policy in [SECURITY.md](SECURITY.md).
+**License**: Distributed under the **MIT License**. Created by the-shadow-0.
