@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "SafeSurf Protocol Integrator",
+  "version": "0.1.0",
+  "description": "Integrates browser tabs with the local SafeSurf safety daemon.",
+  "permissions": ["tabs", "storage", "nativeMessaging"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}

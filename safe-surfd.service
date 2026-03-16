@@ -1,0 +1,19 @@
+# /etc/systemd/system/safe-surfd.service
+[Unit]
+Description=SafeSurf Protocol Security Daemon
+After=network.target tor.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/safe_surfd
+Restart=on-failure
+RestartSec=5s
+
+# Security Hardening
+PrivateTmp=true
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=read-only
+
+[Install]
+WantedBy=multi-user.target
