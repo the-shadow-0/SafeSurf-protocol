@@ -1,4 +1,4 @@
-// SafeSurf Browser Extension - Background Script 
+// SafeSurf Browser Extension - Background Script
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === "ANALYZE_PAGE") {
