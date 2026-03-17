@@ -38,4 +38,4 @@ axum = "0.7" # For the daemon's REST API
 tower-http = { version = "0.5", features = ["cors", "trace"] }
 clap = { version = "4.4", features = ["derive"] }
 reqwest = { version = "0.11", features = ["json"] }
-ammonia = "3.3" # HTML Sanitization 
+ammonia = "3.3" # HTML Sanitization
