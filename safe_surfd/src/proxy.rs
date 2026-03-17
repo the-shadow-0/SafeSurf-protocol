@@ -47,9 +47,6 @@ async fn proxy_handler(
 
     if req.method() == Method::CONNECT {
         // CONNECT is for HTTPS tunneling. 
-        // In a production safety tool, we might MITM here, 
-        // but for this reference, we'll just log and deny or provide a basic tunnel.
-        // For simplicity and safety, let's focus on intercepting HTTP first.
         let mut resp = Response::new(Full::new(Bytes::from("HTTPS Tunneling via CONNECT not yet implemented in this reference. Please use HTTP for sanitization demonstration.")));
         *resp.status_mut() = StatusCode::NOT_IMPLEMENTED;
         return Ok(resp);
