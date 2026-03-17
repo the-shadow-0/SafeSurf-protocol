@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# SafeSurf Demo Script
+# SafeSurf Demo Script 
 
 # 1. Start the daemon in the background
 echo "Starting SafeSurf Daemon..."
