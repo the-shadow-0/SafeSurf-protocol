@@ -1,4 +1,4 @@
-# /etc/systemd/system/safe-surfd.service 
+# /etc/systemd/system/safe-surfd.service
 [Unit]
 Description=SafeSurf Protocol Security Daemon
 After=network.target tor.service
