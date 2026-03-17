@@ -1,4 +1,4 @@
-# Security Policy - SafeSurf Protocol  
+# Security Policy - SafeSurf Protocol   
 
 ## Ethical Use
 This protocol is for defensive protection ONLY. We strictly forbid use for:
