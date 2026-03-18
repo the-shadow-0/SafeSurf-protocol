@@ -1,4 +1,4 @@
-<div align="center">           
+<div align="center">            
 
 # 🌊 SafeSurf Protocol
 ### *The Definitive Safety Layer for the Invisible Web*
